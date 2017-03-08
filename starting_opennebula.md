@@ -1,11 +1,10 @@
-# Máster Profesional Ingeniería Informática. Prácticas de Cloud Computing. Curso 2016-2017. 
+# Máster en Ciencia de Datos e Ingeniería de Computadores. Prácticas de BigData y Cloud Computing. Curso 2016-2017. 
 
 ![Header](https://sites.google.com/site/manuparra/home/headerdicits.png)
 
-Manuel J. Parra Royón (manuelparra@decsai.ugr.es) & José. M. Benítez Sánchez (j.m.benitez@decsai.ugr.es)
+Manuel J. Parra Royón (manuelparra@decsai.ugr.es) &  José. M. Benítez Sánchez (j.m.benitez@decsai.ugr.es)
 
 [UGR](http://www.ugr.es) | [DICITS](http://dicits.ugr.es) | [SCI2S](http://sci2s.ugr.es) | [DECSAI](http://decsai.ugr.es)
-
 
 
 Table of Contents
@@ -34,7 +33,9 @@ Table of Contents
 OpenNebula enable two ways of interaction:
 
 - Command line applications
+  - Using [putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) (from windows) or ssh command (from *NIX systems)
 - Web Application
+  - From your browser
 
 ## First steps with OpenNebula command line
 
@@ -47,7 +48,7 @@ ssh manuparra@docker....
 Change `manuparra` with your `user login`: 
 
 ```
-ssh mccXXXXXXX@docker....
+ssh mdatXXXXXXX@docker....
 ```
 
 Use your previously changed password, when asked.
