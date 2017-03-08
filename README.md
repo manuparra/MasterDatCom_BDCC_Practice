@@ -38,6 +38,8 @@ The working environment consists of the following structure for each user:
    - Max 2 ports redirected from external to internal Docker Containers
 
 
+![ClusterImage](https://sites.google.com/site/manuparra/home/clusterhadoop.jpg)
+
 ## Connecting to Docker Cluster UGR
 
 Log in docker ugr server with your credentials
