@@ -1,17 +1,14 @@
-
-
-# Máster Profesional Ingeniería Informática. Prácticas de Cloud ComputingCurso 2016-2017. 
+# Máster en Ciencia de Datos e Ingeniería de Computadores. Prácticas de BigData y Cloud Computing. Curso 2016-2017. 
 
 ![Header](https://sites.google.com/site/manuparra/home/headerdicits.png)
 
-Manuel J. Parra Royón (manuelparra@decsai.ugr.es), Alberto Fernandez (alberto@decsai.ugr.es)  &  José. M. Benítez Sánchez (j.m.benitez@decsai.ugr.es)
+Manuel J. Parra Royón (manuelparra@decsai.ugr.es) &  José. M. Benítez Sánchez (j.m.benitez@decsai.ugr.es)
 
 [UGR](http://www.ugr.es) | [DICITS](http://dicits.ugr.es) | [SCI2S](http://sci2s.ugr.es) | [DECSAI](http://decsai.ugr.es)
 
 Manuel J. Parra Royón (manuelparra@decsai.ugr.es) & José. M. Benítez Sánchez (j.m.benitez@decsai.ugr.es)
 
 # Primeros pasos con docker
-
 
 Table of Contents
 =================
@@ -60,7 +57,7 @@ Virtual machines include the application, the necessary binaries and libraries, 
 
 ![VMsDiff](https://www.docker.com/sites/default/files/WhatIsDocker_2_VMs_0-2_2.png)
 
-### CONTAINERS
+### Containers
 
 Containers include the application and all of its dependencies, but **share the kernel with other containers, running as isolated processes in user space on the host operating system**. Docker containers are not tied to any specific infrastructure: they run on any computer, on any infrastructure, and in any cloud.
 
@@ -99,14 +96,24 @@ Containers include the application and all of its dependencies, but **share the 
 - Docker runs on Windows, Mac and Linux.
 
 
-
 # Starting with docker
 
-Log and connect to our system with:
+Log and connect to our hadoop cluster system with:
+Firstly try to access to the hadoop ugr server:
 
 ```
 ssh manuparra@hadoop....
 ```
+
+Change `manuparra` with your `user login`: 
+
+```
+ssh mdatXXXXXXX@hadoop....
+```
+
+If you don't kwnow your login, go to [Login](./README.md)
+
+Use your previously changed password, when asked.
 
 First of all, check that you have access to the docker system, try this command:
 
@@ -116,20 +123,24 @@ docker run hello-world
 
 And it will return a message where it shows that your installation appears to be working correctly and you are allow use it.
 
-
 # First container
 
 To create a new container in docker, it can be done in two ways: 
 
-- on the one hand by doing it by creating a docker file (link) or 
+- on the one hand by doing it by creating a **docker file** [see more information here](https://docs.docker.com/engine/getstarted/step_four/) or 
 
 - by downloading / using a container that is already created by other users.
 
-Second option is faster and less complex (we use docker in this way).
+Second option is faster and less complex (we will use docker in this way).
+
+## Docker Market or Docker Hub
+
+Go to [docker hub](https://hub.docker.com/).
 
 Containers already created available to be used are stored in a kind of container market at https://hub.docker.com/. *Virtually anything you think will already be dockerized*. 
 
-But you can also build your own container with everything you need. For example a container having your complete application with all its dependencies, mixing i.e. php, mysql, nginx, etc. on the same container or on different containers.
+But you can also build your own container with everything you need. For example a container having your complete application with all its dependencies, mixing i.e. php, mysql, nginx, R, spark, hadoop, etc. on the same container or on different containers.
+
 
 ## A simple web server with NGINX
 
@@ -177,13 +188,19 @@ Options:
 
 So, we execute:
 
+** Change testnginx  to NGINX_YOURNAME**
+
+
 ```
 docker run -d -p <yourport>:80 --name testnginx nginx
 ```
 
-In ``<yourport>`` write your individually assigned port. See here your ports.
 
-To check if your container is runnig and see the status of all your container:
+In ``<yourport>`` write your individually assigned port. See your ports [here](README.md#dockerports).
+
+To check if your container is runnig, show the status of all your container:
+
+### Status of your containers
 
 ```
 docker ps
@@ -217,7 +234,7 @@ Where ``container ID`` is the unique ID of your Container. You can use Container
 And now, go to your browser and write:
 
 ```
-http://docker.ugr.es:<yourport>/
+http://hadoop.ugr.es:<yourport>/
 ```
 
 ![nginxDocker](https://sites.google.com/site/manuparra/home/docker_nginx.png)
@@ -449,6 +466,7 @@ Run a container allows multiple options to improve docker performance:
   -w, --workdir string              Working directory inside the container
 ```
 
+
 We comment on several of the most relevant options to optimize the operation of the container: cpu-limit, memory-limit, external storage, ...
 
 
@@ -522,7 +540,7 @@ If you have created a container with an application or service already prepared 
 docker push manuparra/myapp_dockerized
 ```
 
-Previously you must have registered on the dockerhub platform .
+Previously you must have registered on the dockerhub platform.
 
 ## Statistics of a container
 
@@ -549,23 +567,8 @@ docker logs testnginx
 90.170.152.124 - - [11/Dec/2016:12:03:08 +0000] "GET / HTTP/1.1" 200 612 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36" "-"
 ```
 
-Nginx logs
-
 
 # Basic exercise with containers:
-
-
-1. Create a docker container (A) with APACHE, SSL and PHP5
-	- What is the SSL port?
-	- How to redirect SSL port to your assigned port?
-
-2. Create a docker container (B) with MySQL
-3. Create a webpage in web server A that connect to MySQL in container B
-
-Remember: 
-
-* Use your assigned port. (See here).
-
 
 
 
