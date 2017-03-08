@@ -51,21 +51,19 @@ Change `manuparra` with your `user login`:
 ssh mdatXXXXXXX@docker....
 ```
 
+If you don't kwnow your login, go to [Login](./README.md)
+
 Use your previously changed password, when asked.
 
 
 **The first action when login is the next:**
 
 ``
-oneuser login mccXXXXXXX —-ssh —-force
+oneuser login mdatXXXXXXX —-ssh —-force
 ``
 
-
-This command is very important, due to,  it creates the session with OpenNebula and it allows to use all commands on OpenNebula.
-
-
-
-
+This command is very important, due to it creates the session with OpenNebula and it allows to use all commands on OpenNebula.
+ 
 
 **OpenNebula commands**:
 
@@ -118,7 +116,7 @@ onetemplate list
 onetemplate show <ID>
 ```
 
-It is normal to appear empty since we have not yet made any template. We will create it later.
+Firstly this is empty since we have not yet made any template. We will create it later.
 
 ### onevm
 
@@ -170,7 +168,7 @@ oneuser login manuparra --ssh --force
 or in your case:
 
 ```
-oneuser login mccXXXXXX --ssh --force
+oneuser login mdatXXXXXX --ssh --force
 ```
 
 If this command works fine, you are allow to use and connect with OpenNebula.
@@ -196,9 +194,9 @@ It will show:
 
 Images are referenced by *"ID"* or *"NAME"*. You can use those IDENTIFIERS to reference list elements.
 
-If we want to use CENTOS7, we need the ID => 9 o NAME => "CentOS-7".
+**If we want to use CENTOS7, we need the ID => 9 o NAME => "CentOS-7"**.
 
-### Listing Virtual Networks for your user
+### Listing Virtual Networks for your user and Virtual Machine
 
 Now we have to verify that we have created our Virtual Network to be able to launch the machines within a correct IP address space:
 
@@ -237,7 +235,14 @@ for example:
 onetemplate create --name "Plantilla_CentOS" --cpu 1 --vcpu 1 --memory 512 --arch x86_64 --disk 9 --nic "manuelparra_vnet" --vnc --ssh --net_context
 ```
 
-Those are the parameters explained:
+or using IDs instead "NAMES":
+
+```
+onetemplate create --name "Plantilla_CentOS" --cpu 1 --vcpu 1 --memory 512 --arch x86_64 --disk 9 --nic 156 --vnc --ssh --net_context
+```
+
+
+Parameters explained:
 
 - --name :   Name of the template to indentify on OpenNebula
 - --cpu : Number of CPUs. Integer.
@@ -325,15 +330,20 @@ and get your Virtual Machine ID:
 onevm show <ID> 
 ```
 
+for this example the ID of Virtual Machine is *60*. Look up your Virtual Machine ID and update it.
+
 ```
 onevm show 60
 ```
 
 It will returns all information about your Virtual Machine.
 
-The part that interests us of the details is to know that IP has been assigned to this machine created:
+
+
+The most interesting part here is to know what is the IP assigned to your recently created virtual machine:
 
 ```
+...
 CONTEXT=[
   DISK_ID="1",
   ETH0_DNS="150.214.191.10",
@@ -342,9 +352,12 @@ CONTEXT=[
   ETH0_MAC="02:00:c0:a8:0c:94",
   NETWORK=“YES",
   ....
+
 ```
 
 So, our Virtual Machine IP to connect with SSH is: ``192.168.10.148``
+
+Also, see your IP [here](./data/ips.table.dat).
 
 We try to connect to the Virtual Machine:
 
@@ -352,7 +365,7 @@ We try to connect to the Virtual Machine:
 ssh root@192.168.12.148
 ```
 
-NOTE: It doesn't need password. WHY ?
+NOTE: It doesn't need password. Why ?
 
 Verify if you are connected to Internet:
 
@@ -360,11 +373,12 @@ Verify if you are connected to Internet:
 ping -c2 google.com
 ```
 
-## HOW to Manage Virtual Machines Platform from SunStone Web Application
+## How to Manage Virtual Machines Platform from SunStone Web Application
 
 Go to: http://docker.ugr.es:9869/ and follow the next steps:
 
 - Connect to docker server ugr: ``ssh manuparra@.....``
+- Authenticate using: ``oneuser login mdatXXXXXXXX --ssh --force``
 - Execute: ``cat .one/one_auth`` it will show your SunStone credentials in this format: ``<user>:<password>`` , for example: ``manuparra:7374j31g74hd7234``
 - Copy the corresponding part of password and paste http://docker.ugr.es:9869/ login and password.
 
