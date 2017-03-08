@@ -178,7 +178,7 @@ docker run -d -p <yourport>:<containerport> --name <mynameofcontainer> <containe
 
 Wait, we need a few minutes to understand PORT assignment:
 
-[!PortAsignmentRstudio](https://sites.google.com/site/manuparra/home/rstudio.png)
+![PortAsignmentRstudio](https://sites.google.com/site/manuparra/home/rstudio.png)
 
 About the options:
 
