@@ -89,6 +89,7 @@ After login, **PLEASE CHANGE** your password using command:
 
 ´´´
 passwd
+
 ´´´
 
 **Try to use a strong password mixing: upper, lower, and punctiation**
