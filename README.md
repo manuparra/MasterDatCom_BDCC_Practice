@@ -97,7 +97,7 @@ What is the infrastructure of the practice?
 
 The complete infraestructure for the practice is the next:
 
-![CompleteStruct](https://sites.google.com/site/manuparra/home/architecturecc.png)
+![CompleteStruct](https://sites.google.com/site/manuparra/home/ArchitectureBDCC.png)
 
 As you see, inside docker you will work with VIRTUAL MACHINES and inside hadoopyou will work with CONTAINERS.
 

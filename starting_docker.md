@@ -250,6 +250,61 @@ usename: rstudio
 passwd: rstudio 
 ```
 
+### Example using RStudio Service with RSNNS
+
+Try this code:
+
+- Install fpp package
+- Install rsnns package
+
+```
+######################################################################
+####FEED FORWARD NEURAL NETWORK - RSNNS PACKAGE#######################
+######################################################################
+
+# RSNNS no funciona con valores perdidos NA, luego para entrenar la red neuronal
+# habría que imputar o no entrenar los valores lageados con NA
+
+library(fpp)
+library(RSNNS)
+library(quantmod)
+
+plot(sunspotarea)
+
+#sunspotarea <- ts(scale(sunspotarea[1:length(sunspotarea)]),start=c(start(sunspotarea)[1],start(sunspotarea)[2]),end=c(end(sunspotarea)[1],end(sunspotarea)[2]))
+#sunspotarea <- (sunspotarea-min(sunspotarea))/(max(sunspotarea)-min(sunspotarea))
+sunspotarea <- ts(normalizeData(sunspotarea[1:length(sunspotarea)]),start=c(start(sunspotarea)[1],start(sunspotarea)[2]),end=c(end(sunspotarea)[1],end(sunspotarea)[2]))
+
+plot(sunspotarea)
+
+# ar(sunspotarea)$order   # nos dice de orden 9, luego 9 rezagos
+
+dat <- data.frame(sunspotarea[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],1)[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],2)[10:length(sunspotarea)],Lag(sunspotarea[1:length(sunspotarea)],3)[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],4)[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],5)[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],6)[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],7)[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],8)[10:length(sunspotarea)], Lag(sunspotarea[1:length(sunspotarea)],9)[10:length(sunspotarea)]) # create with lagged values
+colnames(dat) <- c("y",paste0("Lag.", 1:(ncol(dat)-1)))
+head(dat)
+
+fit <- mlp(dat[2:length(dat)],dat[1],size=5,linOut=T)
+
+ps <- predict(fit, dat[2:length(dat)])
+
+#Examine results
+plot(time(sunspotarea)[1:length(sunspotarea)],sunspotarea[1:length(sunspotarea)],type="l",col = 2)
+lines(time(sunspotarea)[10:length(sunspotarea)],ps, col=3)
+
+
+# Prediction
+pred <- myPrediction(sunspotarea,fit,9,20,colnames(dat[2:length(dat)]),"rsnns")
+
+
+#Examine prediction
+plot(time(sunspotarea)[1:length(sunspotarea)],sunspotarea[1:length(sunspotarea)],type="l",xlim=c(min(time(sunspotarea)),max(max(time(sunspotarea))+20)),ylim=c(min(sunspotarea,pred),max(sunspotarea,pred)))
+lines(time(sunspotarea)[10:length(sunspotarea)],ps, col="red")
+lines(seq(max(time(sunspotarea)),max(time(sunspotarea))+20,length=20), pred, col="blue")
+
+```
+
+
+
 ## ADVANCED: A simple web server with NGINX
 
 The first thing we need is to download the docker image from nginx, for them we check whether or not the image is in the list of available images:
