@@ -15,8 +15,8 @@ Table of Contents
       * [Connecting to Docker Server UGR](#connecting-to-docker-server-ugr)
       * [Connecting to Docker Containers](#connecting-to-docker-containers)
       * [Infrastructure](#infrastructure)
-      * [Docker Cluster port assignment for VIRTUAL MACHINES](# On Docker Cluster this is the account port assignment)
-      * [Hadoop Cluster port assignment for DOCKER CONTAINERS](# On Hadoop Cluster this is the account port assignment for DOCKER CONTAINERS)
+      * [Docker Cluster port assignment for VIRTUAL MACHINES](#on-docker-cluster-this-is-the-account-port-assignment)
+      * [Hadoop Cluster port assignment for DOCKER CONTAINERS](#on-hadoop-cluster-this-is-the-account-port-assignment-for-docker-containers)
 
    * [2. Starting with OPENNEBULA](#starting-with-opennebula)
    * [3. Starting with DOCKER](#starting-with-docker)

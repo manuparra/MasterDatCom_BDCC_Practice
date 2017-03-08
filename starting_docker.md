@@ -13,15 +13,19 @@ Manuel J. Parra Royón (manuelparra@decsai.ugr.es) & José. M. Benítez Sánchez
 Table of Contents
 =================
 
-   
    * [What is docker?](#what-is-docker)
       * [What is the difference between Docker and Virtual Machines?](#what-is-the-difference-between-docker-and-virtual-machines)
          * [VIRTUAL MACHINES](#virtual-machines)
-         * [CONTAINERS](#containers)
+         * [Containers](#containers)
       * [Advantages of Docker](#advantages-of-docker)
-   * [Starting](#starting)
+   * [Starting with docker](#starting-with-docker)
    * [First container](#first-container)
-      * [A simple web server with NGINX](#a-simple-web-server-with-nginx)
+      * [Docker Market or Docker Hub](#docker-market-or-docker-hub)
+      * [Creating a RStudio Data Science service](#creating-a-rstudio-data-science-service)
+         * [Status of your containers](#status-of-your-containers)
+         * [Example using RStudio Service with RSNNS](#example-using-rstudio-service-with-rsnns)
+      * [ADVANCED: A simple web server with NGINX](#advanced-a-simple-web-server-with-nginx)
+         * [Status of your containers](#status-of-your-containers-1)
          * [Enter in the nginx container:](#enter-in-the-nginx-container)
          * [Docker ports redirection](#docker-ports-redirection)
    * [ Review of docker commands](#review-of-docker-commands)
@@ -38,9 +42,6 @@ Table of Contents
       * [Logs of a container](#logs-of-a-container)
    * [Basic exercise with containers:](#basic-exercise-with-containers)
    * [References and more information](#references-and-more-information)
-
-
-
 
 
 # What is docker?
@@ -242,6 +243,7 @@ And now, go to your browser and write:
 
 ```
 http://hadoop.ugr.es:<yourassignedport>/
+```
 
 Use default credentials to login Your Rstudio service: 
 
@@ -256,6 +258,7 @@ Try this code:
 
 - Install fpp package
 - Install rsnns package
+
 
 ```
 ######################################################################
@@ -302,7 +305,6 @@ lines(time(sunspotarea)[10:length(sunspotarea)],ps, col="red")
 lines(seq(max(time(sunspotarea)),max(time(sunspotarea))+20,length=20), pred, col="blue")
 
 ```
-
 
 
 ## ADVANCED: A simple web server with NGINX
@@ -410,11 +412,11 @@ docker exec -i -t testnginx /bin/bash
 
 With this command your are inside of the container and you can modify things, for instance change the main website exposed by NGINX:
 
-``
+```
 vim /usr/share/nginx/html/index.html 
-``
+```
 
-ERROR: command ´´vi´´ is not in container. 
+ERROR: command ``vi`` is not in container. 
 
 ***Why***? -> Container has been built with minimal software! ... , so you need to install it:
 
@@ -424,9 +426,9 @@ apt-get install vim
 
 and try again:
 
-``
+```
 vim /usr/share/nginx/html/index.html 
-``
+```
 
 Edit the file and change something ``<H1>Hello Your Name</H1>``. Save and close and try again in your browser: 
 
