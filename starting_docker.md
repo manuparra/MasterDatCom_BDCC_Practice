@@ -190,7 +190,11 @@ About the options:
 
 ``<container> This is the container that will be executed`` 
 
-So, we execute:
+So, before execute the next command we need:
+
+- One of your EXTERNAL PORT assigned (Look [here](README.md#dockerports))
+- Rstudio INTERNAL PORT (default: 8787)
+- The name of your "RStudio service"
 
 ** Change test_rstudio to rstudio_myname**
 
