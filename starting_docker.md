@@ -287,7 +287,7 @@ fit <- mlp(dat[2:length(dat)],dat[1],size=5,linOut=T)
 
 ps <- predict(fit, dat[2:length(dat)])
 
-#Examine results
+# Examine results
 plot(time(sunspotarea)[1:length(sunspotarea)],sunspotarea[1:length(sunspotarea)],type="l",col = 2)
 lines(time(sunspotarea)[10:length(sunspotarea)],ps, col=3)
 
@@ -296,7 +296,7 @@ lines(time(sunspotarea)[10:length(sunspotarea)],ps, col=3)
 pred <- myPrediction(sunspotarea,fit,9,20,colnames(dat[2:length(dat)]),"rsnns")
 
 
-#Examine prediction
+# Examine prediction
 plot(time(sunspotarea)[1:length(sunspotarea)],sunspotarea[1:length(sunspotarea)],type="l",xlim=c(min(time(sunspotarea)),max(max(time(sunspotarea))+20)),ylim=c(min(sunspotarea,pred),max(sunspotarea,pred)))
 lines(time(sunspotarea)[10:length(sunspotarea)],ps, col="red")
 lines(seq(max(time(sunspotarea)),max(time(sunspotarea))+20,length=20), pred, col="blue")
