@@ -21,6 +21,7 @@ Table of Contents
    * [2. Starting with OPENNEBULA](#starting-with-opennebula)
    * [3. Starting with DOCKER](#starting-with-docker)
 
+
 # Environment of the practice
 
 The working environment consists of the following structure for each user:
@@ -278,7 +279,7 @@ Port: 16105
 --> DOCKER PORTS redirected. User mdat......450 
 Port: 16106 
 Port: 16107
-``
+```
 
 
 # Starting with OPENNEBULA

@@ -359,7 +359,7 @@ docker run -d -p <yourport>:80 --name testnginx nginx
 ```
 
 
-In ``<yourport>`` write your individually assigned port. See your ports [here](README.md#dockerports).
+In ``<yourport>`` write your individually assigned port. See your ports [here](https://github.com/manuparra/MasterDatCom_BDCC_Practice#dockerports).
 
 To check if your container is runnig, show the status of all your container:
 
