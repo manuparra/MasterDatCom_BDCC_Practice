@@ -64,7 +64,7 @@ After login, **PLEASE CHANGE** your password using command:
 passwd
 ```
 
-**Try tu use a strong password mixing: upper, lower, and punctiation**
+**Try to use a strong password mixing: upper, lower, and punctiation**
 
 
 
@@ -91,7 +91,7 @@ After login, **PLEASE CHANGE** your password using command:
 passwd
 ´´´
 
-**Try tu use a strong password mixing: upper, lower, and punctiation**
+**Try to use a strong password mixing: upper, lower, and punctiation**
 
 
 ## Infrastructure
