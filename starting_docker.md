@@ -141,8 +141,112 @@ Containers already created available to be used are stored in a kind of containe
 
 But you can also build your own container with everything you need. For example a container having your complete application with all its dependencies, mixing i.e. php, mysql, nginx, R, spark, hadoop, etc. on the same container or on different containers.
 
+## Creating a RStudio Data Science service
 
-## A simple web server with NGINX
+The first thing we need is to download the docker image from RStudio (on docker hub is: rocker), for them we check whether or not the image is in the list of available images:
+
+
+```
+docker images
+```
+
+If the image is not found locally, Docker will pull it from Docker Hub and you will use it:
+
+```
+docker pull rocker/rstudio
+```
+
+It will download the image of RStudio container. 
+
+And now you can see if image is on images repository using:
+
+```
+docker images
+```
+
+```
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+rocker/rstudio      latest              6a0886126390        13 hours ago        989.6 MB
+nginx               latest              00bba88663ff        8 days ago          181.8 MB...
+```
+
+Run the container, using the next syntax:
+
+```
+docker run -d -p <yourport>:<containerport> --name <mynameofcontainer> <container>
+```
+
+Wait, we need a few minutes to understand PORT assignment:
+
+[!PortAsignmentRstudio](https://sites.google.com/site/manuparra/home/rstudio.png)
+
+About the options:
+
+``-d Run container in background and print container ID``
+
+``-p Publish a container's port(s) to the host``
+
+``--name Name of your contaniner i.e. 'containerofmanuparra'``
+
+``<container> This is the container that will be executed`` 
+
+So, we execute:
+
+** Change test_rstudio to rstudio_myname**
+
+```
+docker run -d -p <yourassignedport>:8787 --name test_rstudio rocker/rstudio
+```
+
+In ``<yourassignedport>`` write your individually assigned port. See your ports [here](README.md#dockerports).
+
+To check if your container is runnig, show the status of all your container:
+
+### Status of your containers
+
+```
+docker ps
+```
+
+And it returns:
+
+```
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                     NAMES
+6ff2fa0c41f3        rocker/rstudio      "/init"             4 seconds ago       Up 3 seconds        0.0.0.0:16001->8787/tcp   serene_bohr ...
+```
+
+Using:
+
+```
+docker ps -a
+```
+
+Will returns containers history (all):
+
+```
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                            NAMES
+52ad2efb9fff        nginx               "nginx -g 'daemon off"   12 minutes ago      Up 12 minutes       443/tcp, 0.0.0.0:14000->80/tcp   testnginx
+...
+```
+
+**IMPORTANT:** 
+
+Where ``container ID`` is the unique ID of your Container. You can use Container ID or NAMES to refer to your container. ``IMAGE`` is the name of the container image. ``PORTS`` show what is the correspondence of the ports between server and docker container.
+
+
+And now, go to your browser and write:
+
+```
+http://hadoop.ugr.es:<yourassignedport>/
+
+Use default credentials to login Your Rstudio service: 
+
+```
+usename: rstudio 
+passwd: rstudio 
+```
+
+## ADVANCED: A simple web server with NGINX
 
 The first thing we need is to download the docker image from nginx, for them we check whether or not the image is in the list of available images:
 
