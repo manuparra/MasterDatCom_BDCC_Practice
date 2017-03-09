@@ -56,13 +56,13 @@ Containers and virtual machines have similar resource isolation and allocation b
 
 Virtual machines include the application, the necessary binaries and libraries, and an **entire guest operating system**,  all of which can amount to tens of GBs.
 
-![VMsDiff](https://www.docker.com/sites/default/files/WhatIsDocker_2_VMs_0-2_2.png)
+![VMsDiff](https://www.docker.com/sites/default/files/VM%402x.png)
 
 ### Containers
 
 Containers include the application and all of its dependencies, but **share the kernel with other containers, running as isolated processes in user space on the host operating system**. Docker containers are not tied to any specific infrastructure: they run on any computer, on any infrastructure, and in any cloud.
 
-![DockersDiff](https://www.docker.com/sites/default/files/WhatIsDocker_3_Containers_2_0.png)
+![DockersDiff](https://www.docker.com/sites/default/files/what_is_a_container.png)
 
 ## Advantages of Docker
 
