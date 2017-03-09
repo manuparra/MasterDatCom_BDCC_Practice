@@ -96,6 +96,8 @@ Containers include the application and all of its dependencies, but **share the 
 
 - Docker runs on Windows, Mac and Linux.
 
+![DockerGrow](https://www.docker.com/sites/default/files/docker-pulls_0.png)
+
 
 # Starting with docker
 
