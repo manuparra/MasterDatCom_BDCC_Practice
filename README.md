@@ -280,6 +280,9 @@ Port: 16105
 --> DOCKER PORTS redirected. User mdat......450 
 Port: 16106 
 Port: 16107
+--> DOCKER PORTS redirected. User mdat......569 
+Port: 16108 
+Port: 16109
 ```
 
 # Starting with DOCKER
