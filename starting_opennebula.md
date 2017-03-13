@@ -355,6 +355,8 @@ CONTEXT=[
 
 ```
 
+
+
 So, our Virtual Machine IP to connect with SSH is: ``192.168.10.148``
 
 Also, see your IP [here](./data/ips.table.dat).
@@ -372,6 +374,74 @@ Verify if you are connected to Internet:
 ```
 ping -c2 google.com
 ```
+
+
+## Managing Virtual Machine Life-cycle
+
+
+The life-cycle of a Virtual Machine within OpenNebula includes the following stages/steps:
+
+**pend**  Pending By default a VM starts in the pending state, waiting for a resource to run on. It will stay in this state until the scheduler decides to deploy it, or the user deploys it using the onevm deploy command.
+
+**hold**  Hold  The owner has held the VM and it will not be scheduled until it is released. It can be, however, deployed manually.
+
+**clon**  Cloning The VM is waiting for one or more disk images to finish the initial copy to the repository (image state still in lock)
+
+**prol**  Prolog  The system is transferring the VM files (disk images and the recovery file) to the host in which the virtual machine will be running.
+
+**boot**  Boot  OpenNebula is waiting for the hypervisor to create the VM.
+
+**runn**  Running The VM is running (note that this stage includes the internal virtualized machine booting and shutting down phases). In this state, the virtualization driver will periodically monitor it.
+
+**migr**  Migrate The VM is migrating from one resource to another. This can be a life migration or cold migration (the VM is saved and VM files are transferred to the new resource).
+
+**hotp**  Hotplug A disk attach/detach, nic attach/detach operation is in process.
+
+**snap**  Snapshot  A system snapshot is being taken.
+
+**save**  Save  The system is saving the VM files after a migration, stop or suspend operation.
+
+**epil**  Epilog  In this phase the system cleans up the Host used to virtualize the VM, and additionally disk images to be saved are copied back to the system datastore.
+
+**shut**  Shutdown  OpenNebula has sent the VM the shutdown ACPI signal, and is waiting for it to complete the shutdown process. If after a timeout period the VM does not disappear, OpenNebula will assume that the guest OS ignored the ACPI signal and the VM state will be changed to running, instead of done.
+
+**stop**  Stopped The VM is stopped. VM state has been saved and it has been transferred back along with the disk images to the system datastore.
+
+**susp**  Suspended Same as stopped, but the files are left in the host to later resume the VM there (i.e. there is no need to re-schedule the VM).
+
+**poff**  PowerOff  
+Same as suspended, but no checkpoint file is generated. Note that the files are left in the host to later boot the VM there.
+
+
+Picture of stages:
+
+![Picture](https://docs.opennebula.org/5.2/_images/states-simple.png)
+
+### Terminating intances
+
+You can terminate an instance with the onevm terminate command, from any state. It will shutdown (if needed) and delete the VM. This operation will free the resources (images, networks, etc) used by the VM.
+
+### Pausing instances
+
+There are two different ways to temporarily stop the execution of a VM: short and long term pauses. A short term pause keeps all the VM resources allocated to the hosts so its resume its operation in the same hosts quickly. Use the following onevm commands or Sunstone actions:
+
+- **suspend**: the VM state is saved in the running Host. When a suspended VM is resumed, it is immediately deployed in the same Host by restoring its saved state.
+- **poweroff**: Gracefully powers off a running VM by sending the ACPI signal. It is similar to suspend but without saving the VM state. When the VM is resumed it will boot immediately in the same Host.
+- **poweroff** --hard: Same as above but the VM is immediately powered off. Use this action when the VM doesn’t have ACPI support.
+- **stop**: Same as undeploy but also the VM state is saved to later resume it.
+
+When the VM is successfully paused you can resume its execution with:
+
+- **resume**: Resumes the execution of VMs in the stopped, suspended, undeployed and poweroff states.
+
+
+### Rebooting VM Instances
+
+Use the following commands to reboot a VM:
+
+- **reboot**:  Reboots a running VM, sending the ACPI signal.
+- **reboot  --hard**: Performs a ‘hard’ reboot.
+
 
 ## How to Manage Virtual Machines Platform from SunStone Web Application
 
