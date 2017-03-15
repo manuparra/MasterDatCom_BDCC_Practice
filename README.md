@@ -293,5 +293,16 @@ Go to: [First steps with Docker Containers](./starting_docker.md)
 
 Go to: [First steps with OpenNebula](./starting_opennebula.md)
 
+# Starting with HDFS
+
+Go to: [First steps with HDFS](./starting_hdfs.md)
+
+# Starting with Hadoop
+
+Go to: [First steps with Hadoop](./starting_hadoop.md)
+
+# Starting with SparkR (spanish)
+
+Go to: [First steps with SparkR](./starting_sparkR.md)
 
 
