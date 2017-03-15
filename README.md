@@ -20,6 +20,10 @@ Table of Contents
 
    * [2. Starting with OPENNEBULA](#starting-with-opennebula)
    * [3. Starting with DOCKER](#starting-with-docker)
+   * [4. Starting with HDFS](#starting-with-hdfs)
+   * [5. Starting with HADOOP](#starting-with-hadoop)
+   * [6. Starting with SPARKR](#starting-with-sparkr)
+
 
 
 # Environment of the practice
