@@ -172,11 +172,24 @@ Fields/Attributes separator: ``,``
 
 ## Check source code of example of MIN
 
-In your home, review the folder: 
+In your home, create a folder:
 
-´´cd minbigdata´´
+´´mkdir minbigdata´´
+
+
+Then copy source files to this folder:
+
+```
+cp /tmp/minbigdata/* /home/mdatXXXXXXXX/minbigdata/
+```
 
 Here is the source code of a hadoop application to calculate the MIN of an attribute or column.
+
+And change to this folder:
+
+```
+cd minbigdata
+```
 
 
 The Mapper code:
