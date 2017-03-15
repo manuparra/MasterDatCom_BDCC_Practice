@@ -136,7 +136,7 @@ Results will be stored on HDFS salida_X folder on your HDFS folder.
 Extract data / header from the bigdata file:
 
 ```
-hadoop dfs -cat  hdfs dfs -ls /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data | head
+hadoop dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
 ```
 
 **QUESTION: Can I use ´´head /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data´´ ??**
@@ -145,7 +145,7 @@ hadoop dfs -cat  hdfs dfs -ls /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data | he
 Extract data / tail from the bigdata file:
 
 ```
-hadoop dfs -cat  hdfs dfs -ls /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data | tail
+hadoop dfs -cat   /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | tail
 ```
 
 Dataset have the next structure:
