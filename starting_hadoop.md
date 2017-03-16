@@ -276,12 +276,12 @@ Let's go with the **result format**:
 List results:
 
 ```
-hadoop dfs -ls  /user/mdatXXXXXXX/salida_wc_01/
+hdfs dfs -ls  /user/mdatXXXXXXX/salida_wc_01/
 ```
 
 Show results
 ```
-hadoop dfs -cat  /user/mdatXXXXXXX/salida_wc_01/part-00000
+hdfs dfs -cat  /user/mdatXXXXXXX/salida_wc_01/part-00000
 ```
 
 **Comment this results: part-XXXXXXX**
@@ -292,7 +292,7 @@ hadoop dfs -cat  /user/mdatXXXXXXX/salida_wc_01/part-00000
 List of jobs running on Hadoop:
 
 ```
-hadoop job -list
+mapred job -list
 ```
 
 And it returns:
@@ -310,13 +310,13 @@ Kill or remove a Job running or stopped or failed:
 
 
 ```
-hadoop job -kill <JobId>
+mapred job -kill <JobId>
 ```
 
 for instance:
 
 ```
-hadoop job -kill job_1489653380280_0015
+mapred job -kill job_1489653380280_0015
 ```
 
 
@@ -327,7 +327,7 @@ Firstly some tricks:
 **How to extract data / header from the bigdata file?:**
 
 ```
-hadoop dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
+hdfs dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
 ```
 
 **QUESTION: Can I use ``head /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data`` ??**
@@ -336,7 +336,7 @@ hadoop dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
 **Extract data / tail from the bigdata file:**
 
 ```
-hadoop dfs -cat   /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | tail
+hdfs dfs -cat   /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | tail
 ```
 
 Dataset has the next structure:
