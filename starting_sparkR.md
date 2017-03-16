@@ -11,8 +11,14 @@ Manuel J. Parra Royón (manuelparra@decsai.ugr.es) & José. M. Benítez Sánchez
 # Primeros pasos SparkR
 
 
+Antes de comenzar, descarga la MV que contiene todo para poder trabajar (spark, R, hadoop, rstudio, jupyter, etc):
+
+https://drive.google.com/file/d/0ByPBMv-S_GMEakRCVVRTejZKVm8/view?usp=sharing
+
 
 ## Objetivos
+
+
 
 Los objetivos del taller de SparkR son los siguientes:
 
