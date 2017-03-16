@@ -13,6 +13,22 @@ Manuel J. Parra Royón (manuelparra@decsai.ugr.es) & José. M. Benítez Sánchez
 Table of Contents
 =================
 
+   * [Starting with Hadoop](#starting-with-hadoop)
+      * [Verifying datasets](#verifying-datasets)
+      * [Dataset features](#dataset-features)
+   * [First example with simple WordCount](#first-example-with-simple-wordcount)
+      * [Reading and studying the code](#read-and-study-the-code)
+      * [Compiling and executing WordCount](#compiling-and-executing-wordcount)
+      * [Check and manage MapReduce Jobs for this example](#check-and-manage-mapreduce-jobs-for-this-example)
+   * [Calculate MIN of a big dataset](#calculate-min-of-a-big-dataset)
+      * [Check source code of example of MIN](#check-source-code-of-example-of-min)
+      * [Compiling and executing MIN function](#compiling-and-executing-min-function)
+      * [Exercices:](#exercices)
+   * [Calculate MAX of a big dataset](#calculate-max-of-a-big-dataset)
+   * [Is the dataset balanced or unbalanced.](#check-if-dataset-if-balanced-or-unbalanced)
+   * [Calculate AVG of a big dataset](#calculate-avg-of-a-big-dataset)
+   * [References](#references)
+
 
 
 # Starting with Hadoop
@@ -96,7 +112,7 @@ And now copy de source code:
 hdfs dfs -get /tmp/BDCC/wordcount/WordCount.java ./
 ```
 
-Read the code with:
+## Read and study the code
 
 ```
 cat WordCount.java
@@ -213,8 +229,9 @@ Main Class or Application MapReduce:
 
 **Remember HDFS commands [here](starting_hdfs.md)**
 
+## Compiling and executing WordCount
 
-Then create a folder for the wordcount classes:
+After that, try to create a folder for the wordcount classes:
 
 ```
 mkdir wordcount_classes 
@@ -270,7 +287,7 @@ hadoop dfs -cat  /user/mdatXXXXXXX/salida_wc_01/part-00000
 **Comment this results: part-XXXXXXX**
 
 
-## Check and manage MapReduce Jobs 
+## Check and manage MapReduce Jobs for this example
 
 List of jobs running on Hadoop:
 
@@ -301,7 +318,6 @@ for instance:
 ```
 hadoop job -kill job_1489653380280_0015
 ```
-
 
 
 # Calculate MIN of a big dataset
@@ -365,6 +381,7 @@ And change to this folder:
 cd minbigdata
 ```
 
+
 The Mapper code:
 
 ```
@@ -395,6 +412,8 @@ public class MinReducer extends MapReduceBase implements Reducer<Text, DoubleWri
 	}
 }}
 ```
+
+## Compiling and executing MIN function
 
 We create classes folder:
 
@@ -449,6 +468,8 @@ We can use the same code of MIN function.
 
 What will be the changes? On Mapper or Reducer?
 
+**Hint: Create a new folder and copy again de MIN code, and change it.**
+
 
 # Check if dataset if balanced or unbalanced.
 
@@ -456,7 +477,7 @@ To check if the dataset is balanced or unbalanced, we need to know how many reco
 
 The class is the last column of the data and can have values of 0 and 1.
 
-Hint: The key (mapper key) must be the value of the class column (11).
+**Hint: The key (mapper key) must be the value of the class column (11).**
 
 # Calculate AVG of a big dataset
 
@@ -465,13 +486,9 @@ Average is the sum of a list of numbers divided by the number of numbers in the 
 # References
 
 - http://sci2s.ugr.es/sites/default/files/files/Teaching/OtherPostGraduateCourses/CienciaDatosBigData/Bloque%20III.zip
-
 - https://github.com/geftimov/MapReduce/blob/master/readme/MedianStdDev.md
-
 - https://github.com/geftimov/MapReduce/blob/master/readme/MedianAndStandardDeviationCommentLengthByHour.md
-
 - https://github.com/geftimov/MapReduce/blob/master/readme/MedianAndStandardDeviationCommentLengthByHour.md
-
 - https://svn.apache.org/repos/asf/hadoop/common/trunk/hadoop-mapreduce-project/hadoop-mapreduce-examples/src/main/java/org/apache/hadoop/examples/WordStandardDeviation.java
 
 
