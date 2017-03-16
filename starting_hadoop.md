@@ -61,7 +61,7 @@ The dataset select for this competition comes from the Protein Structure Predict
 The dataset has 32 million instances, 631 attributes, 2 classes. 
 For this workshop, reduced version of the file will be provided:
 
- - 10 features
+- 10 features
 - 31.992.921 rows
 - 1.2 GB
 
@@ -166,7 +166,7 @@ Extract data / header from the bigdata file:
 hadoop dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
 ```
 
-**QUESTION: Can I use ´´head /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data´´ ??**
+**QUESTION: Can I use ``head /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data`` ??**
 
 
 Extract data / tail from the bigdata file:
