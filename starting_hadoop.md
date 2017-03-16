@@ -322,7 +322,9 @@ hadoop job -kill job_1489653380280_0015
 
 # Calculate MIN of a big dataset
 
-How to extract data / header from the bigdata file?:
+Firstly some tricks:
+
+**How to extract data / header from the bigdata file?:**
 
 ```
 hadoop dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
@@ -331,7 +333,7 @@ hadoop dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
 **QUESTION: Can I use ``head /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data`` ??**
 
 
-Extract data / tail from the bigdata file:
+**Extract data / tail from the bigdata file:**
 
 ```
 hadoop dfs -cat   /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | tail
