@@ -234,20 +234,20 @@ and compile:
 
 
 ```
-javac -cp /usr/lib/hadoop/*:/usr/lib/hadoop-0.20-mapreduce/* -d minbigdata_classes Min.java MinMapper.java MinReducer.java 
+javac -cp /usr/lib/hadoop/*:/usr/lib/hadoop-0.20-mapreduce/* -d minbigdata_classes Min.java MinMapper.java MinReducer.java
 ```
 
 
 create the JAR:
 
 ```
-jar -cvf minbigdata.jar -C minbigdata_classes / .
+/usr/java/jdk1.7.0_51/bin/jar -cvf minbigdata.jar -C minbigdata_classes / .
 ```
 
 and execute hadoop application:
 
 ```
-hadoop jar minbigdata.jar oldapi.Min /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tra.data ./salida_minbigdata/
+hadoop jar minbigdata.jar oldapi.Min /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data  /user/mdatXXXXXX/salida_minbigdata/
 ```
 
 This will produce the result in HDFS ´´./salida_minbigdata´´ folder.
