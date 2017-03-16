@@ -275,7 +275,7 @@ and execute hadoop application:
 hadoop jar minbigdata.jar oldapi.Min /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data  /user/mdatXXXXXX/salida_minbigdata/
 ```
 
-This will produce the result in HDFS ´´./salida_minbigdata´´ folder.
+This will produce the result in HDFS ``./salida_minbigdata`` folder.
 
 List results:
 
