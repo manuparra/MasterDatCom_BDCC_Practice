@@ -280,13 +280,13 @@ This will produce the result in HDFS ´´./salida_minbigdata´´ folder.
 List results:
 
 ```
-hdfs dfs -ls /user/mdatXXXXXX//salida_minbigdata/*
+hdfs dfs -ls /user/mdatXXXXXX/salida_minbigdata/*
 ```
 
 Check the results:
 
 ```
-hdfs dfs -cat /user/mdatXXXXXX//salida_minbigdata/part-XXXXX
+hdfs dfs -cat /user/mdatXXXXXX/salida_minbigdata/part-XXXXX
 ```
 
 ### Exercices:
