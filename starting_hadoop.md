@@ -79,7 +79,21 @@ WordCount is a simple application that counts the number of occurrences of each 
 
 --> PAY ATTENTION: Working on FileSystem or HDFS !
 
-We need to copy the source code of the WordCount application to our home folder:
+We need to copy the source code (from HDFS)  of the WordCount application to our home folder:
+
+Create a folder in your home:
+
+```
+mkdir testwordcount
+```
+
+and change to this new folder:
+
+```
+cd testwordcount
+```
+
+And now copy de source code:
 
 ```
 hdfs dfs -get /tmp/BDCC/wordcount/WordCount.java ./
@@ -94,7 +108,6 @@ Then create a folder in your home folder:
 mkdir wordcount_classes 
 ```
 
-
 Compile the source code of WordCount.java :
 
 ```
@@ -104,7 +117,7 @@ javac -cp /usr/lib/hadoop/*:/usr/lib/hadoop-0.20-mapreduce/* -d wordcount_classe
 Create the JAR:
 
 ```
-jar -cvf wordcount.jar -C wordcount_classes/ .
+/usr/java/jdk1.7.0_51/bin/jar -cvf wordcount.jar -C wordcount_classes/ .
 ```
 
 In this step the Hadoop Application has been created and is ready to execute the word count on a dataset:
@@ -118,17 +131,31 @@ hadoop jar <jar file> <main class> <HDFS INPUT dataset> <OUTPUT results>
 So, execute the next:
 
 ```
-hadoop jar wordcount.jar WordCount /tmp/BDCC/wordcount/dataset/joyceexample/ salida_1
-````
+hadoop jar wordcount.jar WordCount /tmp/BDCC/wordcount/dataset/joyceexample/ /user/mdatXXXXXXX/salida_wc_01/
+```
 
 or, on full version of the text:
 
 ```
-hadoop jar wordcount.jar WordCount /tmp/BDCC/wordcount/dataset/joyce/ salida_2
+hadoop jar wordcount.jar WordCount /tmp/BDCC/wordcount/dataset/joyceexample/ /user/mdatXXXXXXX/salida_wc_02/
 ```
 
-Results will be stored on HDFS salida_X folder on your HDFS folder.
+Results will be stored on HDFS salida_wc_X folder on your HDFS folder.
 
+Let's go:
+
+List results:
+
+```
+hadoop dfs -ls  /user/mdatXXXXXXX/salida_wc_01/
+```
+
+Show results
+```
+hadoop dfs -cat  /user/mdatXXXXXXX/salida_wc_01/part-00000
+```
+
+**Comment part-XXXXXXX**
 
 
 # Calculate MIN of a big dataset
