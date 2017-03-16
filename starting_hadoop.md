@@ -42,16 +42,11 @@ Write the next sentences:
 hdfs dfs -ls /tmp/BDCC/datasets/ECBDL14/
 ```
 
+and
+
 ```
 hdfs dfs -ls /tmp/BDCC/wordcount/
 ```
-
-and 
-
-```
-hdfs dfs -ls /tmp/BDCC/statsexample/
-```
-
 
 ## Dataset features:
 
@@ -62,6 +57,7 @@ The dataset has 32 million instances, 631 attributes, 2 classes.
 For this workshop, reduced version of the file will be provided:
 
 - 10 features
+- 1 class attribute
 - 31.992.921 rows
 - 1.2 GB
 
@@ -77,11 +73,12 @@ WordCount is a simple application that counts the number of occurrences of each 
 
 ![ExampleMapReduce](https://wikis.nyu.edu/download/attachments/74681720/WordCount%20MapReduce%20Paradigm.PNG?version=1&modificationDate=1462902481180&api=v2)
 
+
 --> PAY ATTENTION: Working on FileSystem or HDFS !
 
 We need to copy the source code (from HDFS)  of the WordCount application to our home folder:
 
-Create a folder in your home:
+Create a folder in your home for this project:
 
 ```
 mkdir testwordcount
@@ -99,16 +96,131 @@ And now copy de source code:
 hdfs dfs -get /tmp/BDCC/wordcount/WordCount.java ./
 ```
 
+Read the code with:
+
+```
+cat WordCount.java
+```
+
+An now we study the code:
+
+Libraries:
+
+```
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.conf.*;
+import org.apache.hadoop.io.*;
+import org.apache.hadoop.mapred.*;
+import org.apache.hadoop.util.*;
+```
+
+
+Class WordCount containing the Mapper and the Reducer: 
+
+- Mapper:
+	```
+	public static class Map extends MapReduceBase 
+		implements Mapper<LongWritable, Text, Text, IntWritable> {
+		… … … /*Operaciones que hace el Map*/ … … …
+	}
+	```
+
+- Reducer:
+	```
+ 	public static class Reduce extends MapReduceBase 
+    	  implements Reducer<Text, IntWritable, Text, IntWritable> {
+		… … /*Operaciones que hace el Reduce*/ … … 
+	}
+	```
+
+
+Full Mapper:
+
+```
+public static class Map extends MapReduceBase 
+	implements Mapper<LongWritable, Text, Text, IntWritable> {
+    
+    private final static IntWritable one = new IntWritable(1);
+    private Text word = new Text();
+
+    public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter 		reporter) throws IOException {
+
+      String line = value.toString();
+
+	  //Convertimos el trozo de texto en palabras individuales
+      StringTokenizer tokenizer = new StringTokenizer(line);
+
+	  //Para todas las palabras que tenemos, almacenamos un 1 en cada ocurrencia
+      while (tokenizer.hasMoreTokens()) {
+        word.set(tokenizer.nextToken());
+		 //Guardamos un 1 en cada palabra
+        output.collect(word, one);
+      }
+    }
+
+```
+
+
+Full Reducer:
+
+```
+public static class Reduce extends MapReduceBase 
+      implements Reducer<Text, IntWritable, Text, IntWritable> {
+    
+	public void reduce(Text key, Iterator<IntWritable> values, 			
+		OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
+     
+ 		//Ponemos el contador a 0
+		int sum = 0;
+		//Contamos las ocurrencias de las palabras
+      	while (values.hasNext()) {
+        	sum += values.next().get();
+      	}
+		//Almacenamos para cada palabra las veces que aparece.
+      output.collect(key, new IntWritable(sum));
+    }
+  }
+```
+
+Main Class or Application MapReduce:
+
+```
+	 //La clase que se va usar y que servirá de referencia para el JobTracker
+ 	 JobConf conf = new JobConf(WordCount.class);
+    conf.setJobName("wordcount");
+
+	 //Como será la salida de los datos
+    conf.setOutputKeyClass(Text.class);
+    conf.setOutputValueClass(IntWritable.class);
+
+	 //Clase que controla el Map
+    conf.setMapperClass(Map.class);
+	 //Clase que controla el Reduce
+    conf.setCombinerClass(Reduce.class);
+    conf.setReducerClass(Reduce.class);
+
+    //Como será la entrada de los datos
+    conf.setInputFormat(TextInputFormat.class);
+    conf.setOutputFormat(TextOutputFormat.class);
+
+	//De dónde tomamos la entrada de datos y donde ponemos la salida
+    FileInputFormat.setInputPaths(conf, new Path(args[0]));
+    FileOutputFormat.setOutputPath(conf, new Path(args[1]));
+
+    JobClient.runJob(conf);
+
+```
+
 **Remember HDFS commands [here](starting_hdfs.md)**
 
 
-Then create a folder in your home folder:
+Then create a folder for the wordcount classes:
 
 ```
 mkdir wordcount_classes 
 ```
 
-Compile the source code of WordCount.java :
+Compile the source code of ```WordCount.java``` :
 
 ```
 javac -cp /usr/lib/hadoop/*:/usr/lib/hadoop-0.20-mapreduce/* -d wordcount_classes WordCount.java
@@ -123,7 +235,7 @@ Create the JAR:
 In this step the Hadoop Application has been created and is ready to execute the word count on a dataset:
 
 ```
-Syntax:
+See the syntax:
 
 hadoop jar <jar file> <main class> <HDFS INPUT dataset> <OUTPUT results>
 ```
@@ -142,7 +254,7 @@ hadoop jar wordcount.jar WordCount /tmp/BDCC/wordcount/dataset/joyceexample/ /us
 
 Results will be stored on HDFS salida_wc_X folder on your HDFS folder.
 
-Let's go:
+Let's go with the **result format**:
 
 List results:
 
@@ -155,12 +267,46 @@ Show results
 hadoop dfs -cat  /user/mdatXXXXXXX/salida_wc_01/part-00000
 ```
 
-**Comment part-XXXXXXX**
+**Comment this results: part-XXXXXXX**
+
+
+## Check and manage MapReduce Jobs 
+
+List of jobs running on Hadoop:
+
+```
+hadoop job -list
+```
+
+And it returns:
+
+```
+Total jobs:3
+                  JobId	     State	     StartTime	    UserName	       Queue	  Priority	 UsedContainers	 RsvdContainers	 UsedMem	 RsvdMem	 NeededMem	   AM info
+ job_1489653380280_0013	   RUNNING	 1489658819956	 manuelparra	root.manuelparra	    NORMAL	              1	              1	   2048M	  21504M	    23552M	http://hadoop.ugr.es:8088/proxy/application_1489653380280_0013/
+ job_1489653380280_0015	   RUNNING	 1489659346034	 manuelparra	root.manuelparra	    NORMAL	              1	              1	   2048M	   7168M	     9216M	http://hadoop.ugr.es:8088/proxy/application_1489653380280_0015/
+ job_1489653380280_0012	   RUNNING	 1489658461871	 manuelparra	root.manuelparra	    NORMAL	             15	              1	 704512M	   7168M	   711680M	http://hadoop.ugr.es:8088/proxy/application_1489653380280_0012/
+
+```
+
+Kill or remove a Job running or stopped or failed:
+
+
+```
+hadoop job -kill <JobId>
+```
+
+for instance:
+
+```
+hadoop job -kill job_1489653380280_0015
+```
+
 
 
 # Calculate MIN of a big dataset
 
-Extract data / header from the bigdata file:
+How to extract data / header from the bigdata file?:
 
 ```
 hadoop dfs -cat  /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | head
@@ -175,7 +321,7 @@ Extract data / tail from the bigdata file:
 hadoop dfs -cat   /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.data | tail
 ```
 
-Dataset have the next structure:
+Dataset has the next structure:
 
 ```
 ...
