@@ -2,11 +2,11 @@
 
 ![Header](https://sites.google.com/site/manuparra/home/headerdicits.png)
 
-Manuel J. Parra Royón (manuelparra@decsai.ugr.es) &  José. M. Benítez Sánchez (j.m.benitez@decsai.ugr.es)
+Manuel J. Parra Royón (manuelparra@decsai.ugr.es) 
 
 [UGR](http://www.ugr.es) | [DICITS](http://dicits.ugr.es) | [SCI2S](http://sci2s.ugr.es) | [DECSAI](http://decsai.ugr.es)
 
-Manuel J. Parra Royón (manuelparra@decsai.ugr.es) & José. M. Benítez Sánchez (j.m.benitez@decsai.ugr.es)
+Manuel J. Parra Royón (manuelparra@decsai.ugr.es)
 
 # Primeros pasos con MapReduce y Hadoop
 
