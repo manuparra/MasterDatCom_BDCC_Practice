@@ -201,8 +201,9 @@ Fields/Attributes separator: ``,``
 
 In your home, create a folder:
 
-´´mkdir minbigdata´´
-
+```
+mkdir minbigdata
+```
 
 Then copy source files to this folder:
 
@@ -217,7 +218,6 @@ And change to this folder:
 ```
 cd minbigdata
 ```
-
 
 The Mapper code:
 
@@ -250,7 +250,6 @@ public class MinReducer extends MapReduceBase implements Reducer<Text, DoubleWri
 }}
 ```
 
-
 We create classes folder:
 
 ``
@@ -258,7 +257,6 @@ mkdir minbigdata_classes
 ``
 
 and compile:
-
 
 ```
 javac -cp /usr/lib/hadoop/*:/usr/lib/hadoop-0.20-mapreduce/* -d minbigdata_classes Min.java MinMapper.java MinReducer.java
@@ -279,10 +277,16 @@ hadoop jar minbigdata.jar oldapi.Min /tmp/BDCC/datasets/ECBDL14/ECBDL14_10tst.da
 
 This will produce the result in HDFS ´´./salida_minbigdata´´ folder.
 
+List results:
+
+```
+hdfs dfs -ls /user/mdatXXXXXX//salida_minbigdata/*
+```
+
 Check the results:
 
 ```
-hdfs dfs -cat ./salida_minbigdata/*
+hdfs dfs -cat /user/mdatXXXXXX//salida_minbigdata/part-XXXXX
 ```
 
 ### Exercices:
